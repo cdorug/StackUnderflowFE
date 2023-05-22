@@ -1,0 +1,72 @@
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
+  <div class="container">
+    <a
+      href="#"
+      class="navbar-brand mb-01 h1">
+      <img src="/assets/img/navbar-logo.png" alt="image" width="200" height="40">
+    </a>
+    <button
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      class="navbar-toggler"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a href="#" class="nav-link">
+            Home
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a routerLink="/users" class="nav-link">
+            Users
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a routerLink="/questions" class="nav-link">
+            Questions
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a routerLink="/askSomething" class="nav-link">
+            Ask something
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle"
+             id="navbarDropdown" role="button"
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+          >
+            More
+          </a>
+          <ul class="dropdown-menu"
+              aria-labelledby="navbarDropdown">
+            <li>
+              <a routerLink="/users" class="dropdown-item">
+                More1
+              </a>
+            </li>
+            <li>
+              <a routerLink="/questions" class="dropdown-item">
+                More2
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <button routerLink="/login" type="button" class="btn btn-light ms-auto">Login</button>
+      <button type="button" class="btn btn-light ms-1" (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+
+</nav>
+

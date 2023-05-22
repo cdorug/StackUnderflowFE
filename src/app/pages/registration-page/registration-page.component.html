@@ -1,0 +1,61 @@
+<div class="container h-100">
+  <div class="row h-100">
+    <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+      <div class="d-table-cell align-middle">
+        <div class="text-center mt-4 er">
+          <h1 class="h2 fw-bolder">Get started</h1>
+          <p class="lead">
+            Join a community passionate about solving problems.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="m-sm-4">
+              <form class="m-2">
+                <div class="form-group mb-4">
+                  <i class="bi bi-person me-1"></i>
+                  <label class="fw-bold"> Username </label>
+                  <input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your desired username"
+                         [(ngModel)]="username">
+                </div>
+                <div class="form-group mb-4">
+                  <i class="bi bi-key me-1"></i>
+                  <label class="fw-bold"> Password </label>
+                  <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password"
+                         [(ngModel)]="password">
+                </div>
+                <div class="form-group mb-4">
+                  <i class="bi bi-card-heading me-1"></i>
+                  <label class="fw-bold"> Full name </label>
+                  <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your full name"
+                         [(ngModel)]="fullname">
+                </div>
+                <div class="form-group mb-4">
+                  <i class="bi bi-envelope me-1"></i>
+                  <label class="fw-bold"> Email address </label>
+                  <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email address"
+                         [(ngModel)]="email" >
+                </div>
+                <div class="form-group mb-4">
+                  <i class="bi bi-geo-alt-fill me-1"></i>
+                  <label class="fw-bold"> Location </label>
+                  <input class="form-control form-control-lg" type="text" name="location" placeholder="Add your location"
+                         [(ngModel)]="location" >
+                </div>
+                <div class="form-group mb-4">
+                  <i class="bi bi-images me-1"></i>
+                  <label class="fw-bold"> Profile picture </label>
+                  <input type="text" class="form-control" id="questionImage" name="profilePicture"
+                         [(ngModel)]="imageLink">
+                </div>
+                <div class="text-center mt-3">
+                  <a href="#" class="btn btn-lg btn-dark" (click)="signUp()">Sign up</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

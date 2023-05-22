@@ -1,0 +1,10 @@
+<div class="container my-5">
+  <h1 class="mb-4 fw-bolder">Edit Your Answer</h1>
+  <form>
+    <div class="mb-3">
+      <label for="question-text" class="form-label fs-5 fw-bold">Answer Text</label>
+      <textarea class="form-control" id="question-text" name="questionText" rows="8" [(ngModel)]="newText" placeholder="{{ answer.text }}" required></textarea>
+    </div>
+    <button class="btn btn-dark btn-lg mb-3" (click)="editAnswer()">Edit Answer</button>
+  </form>
+</div>

@@ -1,0 +1,22 @@
+<div class="container my-5">
+  <h1 class="mb-4 fw-bolder">Submit a New Question</h1>
+  <form>
+    <div class="mb-3">
+      <label for="questionTitle" class="form-label fs-5 fw-bold">Question Title</label>
+      <input type="text" class="form-control" id="questionTitle" placeholder="Enter your question title" [(ngModel)]="questionTitle" name="title">
+    </div>
+    <div class="mb-3">
+      <label for="questionImage" class="form-label fs-5 fw-bold">Question Image Link</label>
+      <input type="text" class="form-control" id="questionImage" placeholder="Enter your image link" [(ngModel)]="questionLink" name="link">
+    </div>
+    <div class="mb-3">
+      <label for="questionTags" class="form-label fs-5 fw-bold">Question Tags</label>
+      <input type="text" class="form-control" id="questionTags" placeholder="Enter your tags (comma-separated)" [(ngModel)]="questionTags" name="tags">
+    </div>
+    <div class="mb-3">
+      <label for="question-text" class="form-label fs-5 fw-bold">Question</label>
+      <textarea class="form-control" id="question-text" rows="8" placeholder="Enter your question here" required [(ngModel)]="questionText" name="text"></textarea>
+    </div>
+    <button class="btn btn-dark btn-lg mb-3" (click)="askQuestion()">Submit Question</button>
+  </form>
+</div>

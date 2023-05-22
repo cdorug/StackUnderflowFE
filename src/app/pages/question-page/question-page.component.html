@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-white mb-5">
+        <div class="card-heading clearfix border-bottom mb-4">
+          <h4 class="card-title text-center display-6 my-2" style="font-weight: bold;">Questions</h4>
+
+          <div class="d-flex flex-row align-items-center mb-2">
+            <div class="me-auto text-dark h3">Currently showing {{this.currentCount}} questions.</div>
+            <button type="button" class="btn btn-dark ms-1 btn-lg" (click)="getQuestions()">
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+            <button type="button" class="btn btn-dark ms-1 btn-lg" data-bs-toggle="collapse" data-bs-target="#filter-options">
+              Filter <i class="bi bi-funnel-fill"></i>
+            </button>
+          </div>
+
+
+          <div id="filter-options" class="collapse">
+            <div class="input-group mb-3">
+              <select class="form-select bg-dark text-white"
+                      #mySelect
+                      (change)='sortQuestions(mySelect.value)'>
+                <option value="" disabled selected>Options</option>
+                <option value="myQuestions">My questions</option>
+                <option value="votes">Most votes</option>
+                <option value="datePosted">Newest</option>
+                <option value="title">Title</option>
+              </select>
+              <input type="text" class="form-control bg-dark text-white" placeholder="Search by title"
+                     [(ngModel)]="searchString"
+                     (ngModelChange)="onSearchInputChange($event)">
+              <input type="text" class="form-control bg-dark text-white" placeholder="Search by tag"
+                     [(ngModel)]="searchTagString"
+                     (ngModelChange)="onTagSearchInputChange($event)">
+              <input type="text" class="form-control bg-dark text-white" placeholder="Search by user"
+                     [(ngModel)]="searchUserString"
+                     (ngModelChange)="onUserSearchInputChange($event)">
+              <style>
+                .form-control::placeholder {
+                  color: #ccc;
+                }
+              </style>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body" *ngFor="let question of questions">
+          <ul class="list-unstyled">
+            <li class="position-relative booking">
+              <div class="card bg-dark text-light p-3">
+                <div class="col-auto align-self-center ms-auto">
+                  <div class="card-body d-flex justify-content-end p-1">
+                    <button type="button" class="btn btn-sm btn-outline-info me-2"
+                            *ngIf="loggedInUsername === question.author.username || this.currentUser.role === 'admin'"
+                            (click)="editQuestion(question)">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger me-2"
+                            *ngIf="loggedInUsername === question.author.username || this.currentUser.role === 'admin'"
+                            (click)="deleteQuestion(question)">
+                      <i class="bi bi-x"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="row g-0">
+                  <div class="col-auto align-self-center">
+                    <img [src]="question.imageURL" style="height:100px; width:100px; object-fit: contain">
+                  </div>
+                  <div class="col">
+                    <div class="card-body">
+                      <h5 class="card-title fw-bolder fs-3 mb-2" role="button" [routerLink]="['details', question.questionId]">{{question.title}}</h5>
+                      <p class="card-text m-3" style="width: 90ch; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                        {{question.text}}
+                      </p>
+                      <div class="d-flex flex-wrap gap-2 mt-3">
+                        <button type="button" class="py-1 btn btn-outline-light" *ngFor="let tag of question.tags">{{tag.tagText}}</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-auto d-flex flex-column justify-content-start border-light p-0 mt-3">
+                  <div class="card-body d-flex justify-content-between p-0">
+                    <div class="d-flex align-items-center">
+                      <div class="me-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                *ngIf="loggedInUsername != question.author.username"
+                                (click)="voteUp(question)">
+                          <i class="bi bi-caret-up-fill"></i>
+                        </button>
+                      </div>
+                      <div>
+                        <h5 class="card-title fs-4 mb-0">{{question.votes}}</h5>
+                      </div>
+                      <div class="ms-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                *ngIf="loggedInUsername != question.author.username"
+                                (click)="voteDown(question)">
+                          <i class="bi bi-caret-down-fill"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="fw-light">
+                      <p class="text-end fw-bold m-0" role="button">
+                        <img [src] = this.question.author.profilePicture alt="user's image" class="rounded-circle me-2" width="35" height="35">{{this.question.author.username}}
+                        <span class="fw-bold text-custom-orange"> [Score: <i class="bi bi-star-fill text-custom-orange"></i> {{this.question.author.score}}]</span>
+                        on: {{question.date}} at: {{question.time}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <nav class="mt-5">
+    <ul class="pagination justify-content-center">
+      <!-- Pagination links will be dynamically added here -->
+      <li class="page-item active" aria-current="page"><span class="page-link">1 </span>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">...</a></li>
+      <li class="page-item"><a class="page-link" href="#">25</a></li>
+    </ul>
+  </nav>
+</div>

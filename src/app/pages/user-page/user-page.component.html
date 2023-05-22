@@ -1,0 +1,52 @@
+<div class="container py-3">
+  <h4 class="card-title text-center display-6 my-4 fw-bolder">Users on Stack Underflow:</h4>
+  <div class="users row row-cols-1 row-cols-md-3 g-4">
+    <!-- User cards will be dynamically added here -->
+    <div
+         class="col mb-3 w-25 h-25"
+         role="button"
+         *ngFor="let user of users">
+      <div class="card">
+        <img src="https://img.freepik.com/free-vector/digital-dark-wavy-background_23-2148388254.jpg?w=1380&t=st=1682184050~exp=1682184650~hmac=a72c351d6b888b711e6920446f38c9d98566e9339a1052b57b77edc3c4dfe084" alt="Cover" class="card-img-top"
+             [routerLink]="['details', user.userId]">
+        <div class="card-body text-center">
+          <img [src]=user.profilePicture
+               [routerLink]="['details', user.userId]"
+               style="width:90px;margin-top:-55px" alt="User"
+               class="img-fluid img-thumbnail rounded-circle border-3 border-opacity-75 mb-3 border-dark">
+          <h5
+            class="card-title"
+            [routerLink]="['details', user.userId]">
+              {{user.username}}
+          </h5>
+          <p class="text-secondary mb-1">{{user.role}}</p>
+          <p class="text-muted font-size-sm text-center fw-bold"><i class="bi bi-geo-alt-fill"></i> {{user.location}}</p>
+          <button class="btn btn-danger mt-1"
+                  *ngIf="currentUser.role === 'admin' && user.role != 'banned' && user.role != 'admin'"
+                  (click)="banUser(user)" >
+            <i class="bi bi-hammer"></i> BAN HAMMER
+          </button>
+          <div *ngIf="user.role === 'banned'" class="alert alert-danger banned-user d-flex align-items-center py-2">
+              <i class="bi bi-x fw-bold"></i> BANNED USER
+          </div>
+          <button class="btn btn-danger mt-1"
+                  *ngIf="currentUser.role === 'admin' && user.role == 'banned'"
+                  (click)="unbanUser(user)" >
+            <i class="bi bi-hammer"></i> UNBAN
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="mt-5">
+    <ul class="pagination justify-content-center">
+      <!-- Pagination links will be dynamically added here -->
+      <li class="page-item active" aria-current="page"><span class="page-link">1 </span>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">...</a></li>
+      <li class="page-item"><a class="page-link" href="#">25</a></li>
+    </ul>
+  </nav>
+</div>

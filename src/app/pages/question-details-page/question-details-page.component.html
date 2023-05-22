@@ -1,0 +1,81 @@
+<div class="container my-4" *ngIf="question">
+  <h1 class="fw-bolder">{{question.title}}</h1>
+  <p class="lead m-2" style="word-break: break-all;">{{question.text}}</p>
+  <p class="text-end fw-bold" role="button">
+    <img [src] = this.question.author.profilePicture alt="user's image" class="rounded-circle me-2" width="35" height="35">{{this.question.author.username}}
+    <span class="fw-bold text-custom-orange"> [Score: <i class="bi bi-star-fill text-custom-orange"></i> {{this.question.author.score}}]</span>
+    on: {{question.date}} at: {{question.time}}
+  </p>
+  <hr>
+
+  <h2 class=fw-bolder>Answers</h2>
+
+  <div class="mb-3">
+    <div class="mb-3">
+      <label for="answerInput" class="form-label">Have an idea? Add your answer:</label>
+      <textarea class="form-control" id="answerInput" rows="3" [(ngModel)]="myAnswerText"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="imageInput" class="form-label">Insert a picture link:</label>
+      <input type="text" class="form-control" id="imageInput" [(ngModel)]="myAnswerImageLink">
+    </div>
+
+    <button class="btn btn-dark mb-3" (click)="submitMyAnswer()">Submit</button>
+  </div>
+
+  <ul class="list-unstyled">
+    <li class="position-relative booking" *ngFor="let answer of this.answers" style="margin-bottom: 15px;">
+      <div class="card bg-dark text-light">
+        <div class="card-body d-flex justify-content-end p-1">
+          <button type="button" class="btn btn-sm btn-outline-info me-2"
+                  *ngIf="loggedInUsername === answer.author.username  || this.author.role === 'admin'"
+                  (click)="editAnswer(answer)">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-danger me-2"
+                  *ngIf="loggedInUsername === answer.author.username  || this.author.role === 'admin'"
+                  (click)="deleteAnswer(answer)">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+        <div class="card-body d-flex align-items-center">
+          <div class="d-flex flex-column align-items-center">
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    *ngIf="loggedInUsername != answer.author.username"
+                    (click)="voteUp(answer)" >
+              <i class="bi bi-caret-up-fill"></i>
+            </button>
+            <div class="d-flex align-items-center">
+              <h5 class="card-title fs-4 m-0">{{answer.votes}}</h5>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    *ngIf="loggedInUsername != answer.author.username"
+                    (click)="voteDown(answer)" >
+              <i class="bi bi-caret-down-fill"></i>
+            </button>
+          </div>
+          <div class="col">
+            <p class="card-text m-3" style="word-break: break-all;">{{answer.text}}</p>
+          </div>
+          <div class="col-1 text-end">
+            <img [src]="answer.imageURL" alt="some image" class="rounded-circle ms-2" width="90" height="90">
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center border-light">
+          <div>
+            <span class="fw-medium me-1">Answer by:</span>
+            <img [src]="answer.author.profilePicture" alt="some image" class="rounded-circle ms-2" width="30" height="30">
+            {{answer.author.username}}
+            <span class="fw-bold text-custom-orange"> [Score: <i class="bi bi-star-fill text-custom-orange"></i> {{answer.author.score}}]</span>
+          </div>
+          <div class="fw-medium">
+            {{answer.date}} at: {{answer.time}}
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+
+</div>
